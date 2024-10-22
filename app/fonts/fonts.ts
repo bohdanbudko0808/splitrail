@@ -1,5 +1,5 @@
-import { Inter, Raleway } from 'next/font/google'
-import localFont from 'next/font/local'
+import { Inter, Raleway, Walter_Turncoat } from 'next/font/google'
+//import localFont from 'next/font/local'
 
 // define your variable fonts
 const inter = Inter({
@@ -15,9 +15,8 @@ const raleway = Raleway({
     weight:['500', '700']
 });
 
-// define a custom local font where GreatVibes-Regular.ttf is stored in the styles folder
-const walter = localFont({ 
-    src: "./WalterTurncoat.woff2",
+const walter = Walter_Turncoat({ 
+    subsets:['latin'],
     display:'swap',
     variable: "--font-walter",
     weight: "400",
