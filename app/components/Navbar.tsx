@@ -1,6 +1,10 @@
+"use client";
+import { useState } from "react";
 import { raleway } from '../fonts/fonts';
 import Link from "next/link";
-import Image from "next/image";
+import { IoClose } from "react-icons/io5";
+import { FaBars } from "react-icons/fa6";
+
 
 interface Nav{
     title:string;
@@ -17,17 +21,40 @@ export default function Navbar() {
         {title:"Contact Us", link:"/contact-us"},
         {title:"Now Franchising",link:"https://splitrailstorefranchise.com/"}
     ];
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => {
+        setIsOpen(!isOpen);
+    };
     return(
-        <div className={`${raleway.variable} antialiased full-height fixed-nav`} >
+        <div className={`${raleway.variable} antialiased fixed-nav`} >
             <nav className="main-nav">
                 <Link href="/" className='main-logo'>
-                    <Image className="" src="/Fence-Logo.png" alt="Fence-Logo.png" width={215} height={196} />
+                    <img className="" src="/Fence-Logo.png" alt="Fence-Logo.png" width="100%" />
                 </Link>
-                {navigations.map((item, index) => (
-                    <Link key={index} href={`${item.link}`} >
-                        {item.title}
-                    </Link>
-                ))}
+                <div className="mobile-only">
+                    <button onClick={toggle} className="">
+                        {isOpen ? (
+                        <IoClose />
+                        ) : (
+                        <FaBars />
+                        )}
+                    </button>
+                
+                    {isOpen && (
+                        navigations.map((item, index) => (
+                            <Link key={index} href={`${item.link}`} >
+                                {item.title}
+                            </Link>
+                        ))
+                    )}
+                </div>
+                <div className="desktop-only">
+                    {navigations.map((item, index) => (
+                        <Link key={index} href={`${item.link}`} >
+                            {item.title}
+                        </Link>
+                    ))}
+                </div>
             </nav>
         </div>
     );
